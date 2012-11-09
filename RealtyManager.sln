@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hf", "hf\hf.csproj", "{8763E91D-EACD-46DB-A746-32ADA541E222}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{8763E91D-EACD-46DB-A746-32ADA541E222}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
