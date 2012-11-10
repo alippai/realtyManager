@@ -5,17 +5,25 @@ using System.Web;
 
 namespace Database.Models
 {
-        // tesyttttttttttttsjghkjsdkjg\jkg
+        // test
         public class RealtyRepository : IRealtyRepository
         {
             private List<Realty> realties = new List<Realty>();
-            private int _nextId = 1;
+            private int _nextIdReal = 1;
+
+            //for profile repository
+
+            //private List<Profile> profiles = new List<Profile>();
+            //private int _nextIdProf = 1;
 
             public RealtyRepository()
             {
-                Add(new Realty { Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
-                Add(new Realty { Name = "Yo-yo", Category = "Toys", Price = 3.75M });
-                Add(new Realty { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+                Profile owner1 = new Profile { Name = "Almafa", Email = "alma@alma.hu", Phone_N = "+36301234567"};
+                Add(new Realty { Address = "Budapest, Irinyi Jozsef 42, 1117", Owner = owner1, Price = 1.39M, Room = 2.5, Size = 69.5, });
+
+                Profile owner2 = new Profile { Name = "Kortefa", Email = "korte@korte.hu", Phone_N = "+36301234567" };
+                Add(new Realty { Address = "Budapest, Rozsadomb, 1097", Owner = owner2, Price = 133.39M, Room = 24.5, Size = 659.5, });
+                
             }
 
             public IEnumerable<Realty> GetAll()
@@ -34,7 +42,7 @@ namespace Database.Models
                 {
                     throw new ArgumentNullException("item");
                 }
-                item.Id = _nextId++;
+                item.Id = _nextIdReal++;
                 realties.Add(item);
                 return item;
             }
