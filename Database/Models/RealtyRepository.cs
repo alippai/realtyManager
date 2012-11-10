@@ -5,7 +5,6 @@ using System.Web;
 
 namespace Database.Models
 {
-        // tesyttttttttttttsjghkjsdkjg\jkg
         public class RealtyRepository : IRealtyRepository
         {
             private List<Realty> realties = new List<Realty>();
