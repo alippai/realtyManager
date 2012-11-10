@@ -12,8 +12,7 @@ namespace Database.Models
         public double Size { get; set; }
         public double Room { get; set; }
         public decimal Price { get; set; }
-        public Profile Owner { get; set; }
-        // public string Category { get; set; }
-
+        public int ownerId { get; set; }
+        public virtual Profile Owner { get; set; }
     }
 }

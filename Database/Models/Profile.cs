@@ -11,7 +11,5 @@ namespace Database.Models
         public string Name { get; set; }
         public string Phone_N { get; set; }
         public string Email { get; set; }
-
-
     }
 }
