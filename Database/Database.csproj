@@ -128,6 +128,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DatabaseContext.cs" />
+    <Compile Include="Models\DatabaseContextInitializer.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\RealtyRepository.cs" />
     <Compile Include="Models\Realty.cs" />
