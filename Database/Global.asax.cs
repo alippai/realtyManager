@@ -26,7 +26,7 @@ namespace Database
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            System.Data.Entity.Database.SetInitializer(new DatabaseContextInitializer());
+            //System.Data.Entity.Database.SetInitializer(new DatabaseContextInitializer());
         }
     }
 }
