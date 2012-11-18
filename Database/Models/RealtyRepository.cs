@@ -18,12 +18,7 @@ namespace Database.Models
 
             public RealtyRepository()
             {
-                Profile owner1 = new Profile { Name = "Almafa", Email = "alma@alma.hu", Phone_N = "+36301234567"};
-                Add(new Realty { Address = "Budapest, Irinyi Jozsef 42, 1117", Owner = owner1, Price = 1.39M, Room = 2.5, Size = 69.5, });
-
-                Profile owner2 = new Profile { Name = "Kortefa", Email = "korte@korte.hu", Phone_N = "+36301234567" };
-                Add(new Realty { Address = "Budapest, Rozsadomb, 1097", Owner = owner2, Price = 133.39M, Room = 24.5, Size = 659.5, });
-                
+               
             }
 
             public IEnumerable<Realty> GetAll()
@@ -33,7 +28,7 @@ namespace Database.Models
 
             public Realty Get(int id)
             {
-                return realties.Find(p => p.Id == id);
+                return realties.Find(p => p.RealtyId == id);
             }
 
             public Realty Add(Realty item)
@@ -42,14 +37,14 @@ namespace Database.Models
                 {
                     throw new ArgumentNullException("item");
                 }
-                item.Id = _nextIdReal++;
+                item.RealtyId = _nextIdReal++;
                 realties.Add(item);
                 return item;
             }
 
             public void Delete(int id)
             {
-                realties.RemoveAll(p => p.Id == id);
+                realties.RemoveAll(p => p.RealtyId == id);
             }
 
             public Realty Update(Realty item)
@@ -58,7 +53,7 @@ namespace Database.Models
                 {
                     throw new ArgumentNullException("item");
                 }
-                int index = realties.FindIndex(p => p.Id == item.Id);
+                int index = realties.FindIndex(p => p.RealtyId == item.RealtyId);
                 realties.RemoveAt(index);
                 realties.Add(item);
                 return item;

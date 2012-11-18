@@ -4,7 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
-using WebApplication.Models;
+using Database.Models;
 
 namespace WebApplication.Filters
 {
@@ -25,8 +25,6 @@ namespace WebApplication.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
-
                 try
                 {
                     using (var context = new UsersContext())
