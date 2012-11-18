@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using Database.Models;
+using RealtyManager.Models;
 
-namespace WebApplication
+namespace RealtyManager
 {
     public static class AuthConfig
     {

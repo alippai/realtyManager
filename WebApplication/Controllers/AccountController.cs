@@ -8,10 +8,10 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using WebApplication.Filters;
-using Database.Models;
+using RealtyManager.Filters;
+using RealtyManager.Models;
 
-namespace WebApplication.Controllers
+namespace RealtyManager.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]

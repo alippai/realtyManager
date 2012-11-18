@@ -1,105 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
-namespace WebApplication.Controllers
+using RealtyManager.Models;
+
+namespace RealtyManager.Controllers
 {
-    public class RealtyController : Controller
+    public class RealtyController : ApiController
     {
-        //
-        // GET: /Realty/
+        static readonly IRealtyRepository repository = new RealtyRepository();
 
-        public ActionResult Index()
+        public IEnumerable<Realty> GetAllRealties()
         {
-            return View();
+            return repository.GetAll();
         }
 
-        //
-        // GET: /Realty/Details/5
-
-        public ActionResult Details(int id)
+        public Realty GetRealty(int id)
         {
-            return View();
-        }
-
-        //
-        // GET: /Realty/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Realty/Create
-
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            Realty item = repository.Get(id);
+            if (item == null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            catch
-            {
-                return View();
-            }
+            return item;
         }
-
-        //
-        // GET: /Realty/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Realty/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Realty/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Realty/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }
