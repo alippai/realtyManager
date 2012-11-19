@@ -11,6 +11,6 @@ realties:</p>
 <ul>
     @foreach (var realty in Model)
     {
-        <li>@Html.ActionLink(realty.Address, "Browse", new { realty = realty.Address })</li>
+        <li>@Html.ActionLink(realty.Address, "Details", new { realty = realty.Address })</li>
     }
 </ul>

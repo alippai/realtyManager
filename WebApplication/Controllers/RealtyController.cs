@@ -31,9 +31,9 @@ namespace RealtyManager.Controllers
 
         //
         // GET: /Realty/Details
-        public ActionResult Details(int id)
+        public ActionResult Details(string address)
         {
-            var realty = new Realty { Type = "Address " + id };
+            var realty = new Realty { Type = "Address " + address };
             return View(realty);
         }
 
