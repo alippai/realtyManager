@@ -81,6 +81,7 @@ namespace RealtyManager.Models
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [EmailAddress]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
 

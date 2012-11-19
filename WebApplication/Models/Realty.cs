@@ -10,6 +10,7 @@ namespace RealtyManager.Models
         public int RealtyId { get; set; }
         public string Address { get; set; }
         public double Size { get; set; }
+        public string Type { get; set; }
         public double Room { get; set; }
         public decimal Price { get; set; }
         public UserProfile Owner { get; set; }

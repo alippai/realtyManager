@@ -15,9 +15,9 @@ namespace RealtyManager.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Browse()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Browse between realties";
 
             return View();
         }

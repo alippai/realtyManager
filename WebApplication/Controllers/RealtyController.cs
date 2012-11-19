@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 
 using RealtyManager.Models;
+using System.Web;
 
 namespace RealtyManager.Controllers
 {
@@ -20,13 +21,18 @@ namespace RealtyManager.Controllers
 
         public Realty GetRealty(int id)
         {
-            Realty item = repository.Get(id);
-            if (item == null)
+            Realty realty = repository.Get(id);
+            if (realty == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            return item;
+            return View(realty);
         }
-        
+
+        public string Browse(string type)
+        {
+            string message = HttpUtility.HtmlEncode("Realty.Browse, Type = " + type);
+            return message;
+        }
     }
 }

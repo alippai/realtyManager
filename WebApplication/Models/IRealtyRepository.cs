@@ -6,15 +6,6 @@ using System.Threading.Tasks;
 
 namespace RealtyManager.Models
 {
-   /* interface IRealtyRepository
-    {
-        IEnumerable<Realty> GetAll();
-        Realty Get(int id);
-        Realty Add(Realty item);
-        void Remove(int id);
-        bool Update(Realty item);
-    }*/
-
     public interface IRealtyRepository
     {
         Realty Get(int id);

@@ -11,11 +11,7 @@ namespace RealtyManager.Models
             private List<Realty> realties = new List<Realty>();
             private int _nextIdReal = 1;
 
-            //for profile repository
-
-            //private List<Profile> profiles = new List<Profile>();
-            //private int _nextIdProf = 1;
-
+            
             public RealtyRepository()
             {
                
