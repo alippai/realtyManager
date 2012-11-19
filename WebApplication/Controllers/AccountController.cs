@@ -199,7 +199,7 @@ namespace RealtyManager.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+        /*
         //
         // POST: /Account/ExternalLogin
 
@@ -326,7 +326,7 @@ namespace RealtyManager.Controllers
 
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
-        }
+        }*/
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
@@ -348,7 +348,7 @@ namespace RealtyManager.Controllers
             RemoveLoginSuccess,
         }
 
-        internal class ExternalLoginResult : ActionResult
+    /*    internal class ExternalLoginResult : ActionResult
         {
             public ExternalLoginResult(string provider, string returnUrl)
             {
@@ -364,7 +364,7 @@ namespace RealtyManager.Controllers
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
             }
         }
-
+        */
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
