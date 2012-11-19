@@ -1,0 +1,16 @@
+﻿@model IEnumerable<RealtyManager.Models.Realty>
+
+@{
+    ViewBag.Title = "Browse";
+}
+<h3>Browse Realties</h3>
+<p>
+    Select from @Model.Count()
+realties:</p>
+
+<ul>
+    @foreach (var realty in Model)
+    {
+        <li>@Html.ActionLink(realty.Address, "Browse", new { realty = realty.Address })</li>
+    }
+</ul>
