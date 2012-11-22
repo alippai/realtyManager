@@ -9,7 +9,7 @@ namespace RealtyManager.Controllers
 {
     public class RealtyController : Controller
     {
-        DatabaseContext realtiesDB = new DatabaseContext();
+        RealtyContext realtiesDB = new RealtyContext();
 
         // GET: /Realty/
         public ActionResult Index()

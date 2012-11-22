@@ -6,6 +6,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RealtyManager.Models;
+using System.Data.Entity;
+using Devtalk.EF.CodeFirst;
+using WebMatrix.WebData;
 
 namespace RealtyManager
 {
@@ -17,7 +21,9 @@ namespace RealtyManager
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<RealtyContext>());
+            Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<UsersContext>());
+            WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
