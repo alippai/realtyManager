@@ -32,13 +32,13 @@ namespace RealtyManager.Controllers
 
         //
         // GET: /Realty/Details
-        public ActionResult Details(string address)
+      /*  public ActionResult Details(string address)
         {
             var realty = new Realty { Type = "Address " + address };
             return View(realty);
         }
 
 
-
+        */
     }
 }

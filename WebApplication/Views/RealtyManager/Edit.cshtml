@@ -54,6 +54,14 @@
             @Html.ValidationMessageFor(model => model.Price)
         </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Description, 10, 55, null)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
         <p>
             <input type="submit" value="Save" />
         </p>
