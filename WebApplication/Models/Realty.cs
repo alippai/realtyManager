@@ -13,6 +13,5 @@ namespace RealtyManager.Models
         public string Type { get; set; }
         public double Room { get; set; }
         public decimal Price { get; set; }
-        public UserProfile Owner { get; set; }
     }
 }
