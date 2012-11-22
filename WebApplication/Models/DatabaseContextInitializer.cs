@@ -10,7 +10,6 @@ namespace RealtyManager.Models
     {
         protected override void Seed(DatabaseContext context)
         {
-            // Use the context to seed the db.
         }
     }
 }

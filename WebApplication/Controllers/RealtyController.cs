@@ -9,7 +9,8 @@ namespace RealtyManager.Controllers
 {
     public class RealtyController : Controller
     {
-        //
+        DatabaseContext realtiesDB = new DatabaseContext();
+
         // GET: /Realty/
         public ActionResult Index()
         {
@@ -25,8 +26,8 @@ namespace RealtyManager.Controllers
         // GET: /Realty/Browse
         public ActionResult Browse(string username)
         {
-            var users = new UserProfile { UserName = username };
-            return View(users);
+            var realties = realtiesDB.Realties.ToList();
+            return View(realties);
         }
 
         //
@@ -36,6 +37,7 @@ namespace RealtyManager.Controllers
             var realty = new Realty { Type = "Address " + address };
             return View(realty);
         }
+
 
 
     }
