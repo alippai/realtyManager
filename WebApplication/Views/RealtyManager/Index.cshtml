@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table class="table table-striped">
     <tr>
         <th>
             @Html.ActionLink("Address","Index", new { sortOrder=ViewBag.AddressSortParm})
@@ -47,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RealtyId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RealtyId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RealtyId })
+            @Html.ActionLink("Edit", "Edit", new { id=item.RealtyId }, new {@class = "btn btn-primary" }) |
+            @Html.ActionLink("Details", "Details", new { id=item.RealtyId }, new {@class = "btn"}) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.RealtyId }, new {@class = "btn btn-danger"})
         </td>
     </tr>
 }
