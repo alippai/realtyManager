@@ -26,7 +26,7 @@
         <th>
             @Html.ActionLink("Price","Index", new { sortOrder=ViewBag.PriceSortParm})
         </th>
-        <th></th>
+        <th>Operations</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -47,8 +47,8 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RealtyId }, new {@class = "btn btn-primary" }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RealtyId }, new {@class = "btn"}) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.RealtyId }, new {@class = "btn btn-primary" })
+            @Html.ActionLink("Details", "Details", new { id=item.RealtyId }, new {@class = "btn"})
             @Html.ActionLink("Delete", "Delete", new { id=item.RealtyId }, new {@class = "btn btn-danger"})
         </td>
     </tr>
