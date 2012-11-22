@@ -21,8 +21,6 @@ namespace RealtyManager
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<RealtyContext>());
-            Database.SetInitializer(new DontDropDbJustCreateTablesIfModelChanged<UsersContext>());
             WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
