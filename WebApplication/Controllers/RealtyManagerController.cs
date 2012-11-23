@@ -82,7 +82,7 @@ namespace RealtyManager.Controllers
 
         //
         // GET: /RealtyManager/Create
-
+        [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Create()
         {
             return View();
@@ -92,10 +92,16 @@ namespace RealtyManager.Controllers
         // POST: /RealtyManager/Create
 
         [HttpPost]
+        [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Create(Realty realty)
         {
             if (ModelState.IsValid)
             {
+                var curUser = (from u in db.UserProfiles
+                               where u.UserName == User.Identity.Name
+                               select u).Single();
+
+                realty.OwnerId = curUser.UserId;
                 db.Realties.Add(realty);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -125,6 +131,11 @@ namespace RealtyManager.Controllers
         {
             if (ModelState.IsValid)
             {
+                var curUser = (from u in db.UserProfiles
+                               where u.UserName == User.Identity.Name
+                               select u).Single();
+
+                realty.OwnerId = curUser.UserId;
                 db.Entry(realty).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

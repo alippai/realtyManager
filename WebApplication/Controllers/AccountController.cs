@@ -79,7 +79,12 @@ namespace RealtyManager.Controllers
                 // Attempt to register the user
                 try
                 {
+                    if (!Roles.RoleExists("LoggedIn"))
+                        Roles.CreateRole("LoggedIn");
+                    if (!Roles.RoleExists("Administrator"))
+                        Roles.CreateRole("Administrator");
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "LoggedIn" });
                     WebSecurity.Login(model.UserName, model.Password);
                     return RedirectToAction("Index", "Home");
                 }

@@ -27,7 +27,7 @@ namespace RealtyManager.Filters
             {
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new RealtyContext())
                     {
                         if (!context.Database.Exists())
                         {

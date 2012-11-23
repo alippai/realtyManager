@@ -11,10 +11,12 @@ namespace RealtyManager.Models
     public class RealtyContext : DbContext
     {
         public DbSet<Realty> Realties { get; set; }
-        public RealtyContext():base("RealtyDB")
-        {
-            Configuration.ProxyCreationEnabled = false;
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        
+        public RealtyContext() : base("DefaultConnection")
+        {   
+            this.Configuration.ProxyCreationEnabled = true;
+            this.Configuration.AutoDetectChangesEnabled = true;
         }
-
     }
 }
