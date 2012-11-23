@@ -32,7 +32,7 @@
             @Html.LabelFor(model => model.Type)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Type)
+            @Html.DropDownListFor(model => model.Type,new SelectList(Enum.GetValues(typeof(RealtyManager.Models.TypeNames))))
             @Html.ValidationMessageFor(model => model.Type)
         </div>
 
@@ -56,7 +56,7 @@
             @Html.LabelFor(model => model.Description)
         </div>
         <div class="editor-field">
-            @Html.TextAreaFor(model => model.Price, 10, 55, null)
+            @Html.TextAreaFor(model => model.Description, 10, 55, null)
             @Html.ValidationMessageFor(model => model.Description)
         </div>
 

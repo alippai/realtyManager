@@ -34,7 +34,7 @@
             @Html.LabelFor(model => model.Type)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Type)
+            @Html.DropDownList("Type", String.Empty)
             @Html.ValidationMessageFor(model => model.Type)
         </div>
 

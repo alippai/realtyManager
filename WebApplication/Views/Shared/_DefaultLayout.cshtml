@@ -26,13 +26,15 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-
           <a class="brand" href="#">BME - Real Estate Manager</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li>@Html.ActionLink("Home", "Index", "Home")</li>
               <li>@Html.ActionLink("Browse", "Index", "RealtyManager")</li>
             </ul>
+            <div class="navbar-text pull-right">
+              @Html.Partial("_LoginPartial")
+            </div>
           </div><!--/.nav-collapse -->
         </div>
       </div>
