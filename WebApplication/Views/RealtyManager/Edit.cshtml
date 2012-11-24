@@ -34,7 +34,7 @@
             @Html.LabelFor(model => model.Type)
         </div>
         <div class="editor-field">
-            @Html.DropDownList("Type", String.Empty)
+            @Html.DropDownListFor(model => model.Type,new SelectList(Enum.GetValues(typeof(RealtyManager.Models.TypeNames))))
             @Html.ValidationMessageFor(model => model.Type)
         </div>
 
