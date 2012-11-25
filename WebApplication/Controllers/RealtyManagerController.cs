@@ -23,7 +23,7 @@ namespace RealtyManager.Controllers
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price desc" : "Price";
-            var realties = from s in db.Realties select s;
+            var realties = from s in db.Realties join u in db.UserProfiles on s.OwnerId equals u.UserId where u.UserName == User.Identity.Name select s;
             switch (sortOrder)
             {
                 case "Address desc":
