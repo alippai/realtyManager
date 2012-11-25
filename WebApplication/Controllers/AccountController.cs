@@ -90,7 +90,14 @@ namespace RealtyManager.Controllers
                     Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "LoggedIn" });
                     WebSecurity.Login(model.UserName, model.Password);
 
-                    db.Entry(model).State = EntityState.Modified;
+                    var curUser = (from u in db.UserProfiles
+                                   where u.UserName == model.UserName
+                                   select u).Single();
+
+                    var user = db.UserProfiles.Find(curUser.UserId);
+                    user.Email = model.Email;
+                    user.Phone = model.Phone;
+                    db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
