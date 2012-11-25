@@ -21,6 +21,7 @@ namespace RealtyManager
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            Database.SetInitializer<RealtyContext>(new DropCreateDatabaseIfModelChanges<RealtyContext>());
             RealtyContext db = new RealtyContext();
             db.Database.Initialize(true);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
