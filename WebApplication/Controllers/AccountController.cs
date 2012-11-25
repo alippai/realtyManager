@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using RealtyManager.Filters;
 using RealtyManager.Models;
+using System.Data;
 
 namespace RealtyManager.Controllers
 {
@@ -17,6 +18,8 @@ namespace RealtyManager.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private RealtyContext db = new RealtyContext();
+
         //
         // GET: /Account/Login
 
@@ -86,6 +89,9 @@ namespace RealtyManager.Controllers
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "LoggedIn" });
                     WebSecurity.Login(model.UserName, model.Password);
+
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
