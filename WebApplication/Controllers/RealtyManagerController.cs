@@ -23,7 +23,7 @@ namespace RealtyManager.Controllers
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price desc" : "Price";
-            var realties = from s in db.Realties join u in db.UserProfiles on s.OwnerId equals u.UserId where u.UserName == User.Identity.Name select s;
+            var realties = from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name select r;
             switch (sortOrder)
             {
                 case "Address desc":
@@ -114,6 +114,12 @@ namespace RealtyManager.Controllers
             {
                 return HttpNotFound();
             }
+            realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
+            if (!User.IsInRole("Administrator") || realty == null)
+            {
+                throw new HttpException(403, "You are unauthorized to access this page. Please log in.");
+            }
+            
             return View(realty);
         }
 
@@ -128,8 +134,8 @@ namespace RealtyManager.Controllers
                 var curUser = (from u in db.UserProfiles
                                where u.UserName == User.Identity.Name
                                select u).Single();
-
                 realty.OwnerId = curUser.UserId;
+
                 realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 db.Entry(realty).State = EntityState.Modified;
                 db.SaveChanges();
@@ -148,6 +154,11 @@ namespace RealtyManager.Controllers
             if (realty == null)
             {
                 return HttpNotFound();
+            }
+            realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
+            if (!User.IsInRole("Administrator") || realty == null)
+            {
+                throw new HttpException(403, "You are unauthorized to access this page. Please log in.");
             }
             return View(realty);
         }
