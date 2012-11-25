@@ -90,7 +90,7 @@ namespace RealtyManager.Controllers
                 var curUser = (from u in db.UserProfiles
                                where u.UserName == User.Identity.Name
                                select u).Single();
-                realty.youtubeID(realty.VideoLink);
+                realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 realty.OwnerId = curUser.UserId;
                 db.Realties.Add(realty);
                 db.SaveChanges();
@@ -127,6 +127,7 @@ namespace RealtyManager.Controllers
                                select u).Single();
 
                 realty.OwnerId = curUser.UserId;
+                realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 db.Entry(realty).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
