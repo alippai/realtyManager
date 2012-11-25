@@ -1,16 +1,48 @@
 ﻿@model IEnumerable<RealtyManager.Models.Realty>
 
-@{
-    ViewBag.Title = "Browse";
-}
-<h3>Browse Realties</h3>
-<p>
-    Select from @Model.Count()
-realties:</p>
+<h2>Find your dream</h2>
 
-<ul>
-    @foreach (var realty in Model)
-    {
-        <li>@Html.ActionLink(realty.Address, "Details", new { realty = realty.Address })</li>
-    }
-</ul>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.ActionLink("Address","Index2", new { sortOrder=ViewBag.AddressSortParm})
+        </th>
+        <th>
+            @Html.ActionLink("Size","Index2", new { sortOrder=ViewBag.SizeSortParm})
+        </th>
+        <th>
+            @Html.ActionLink("Type","Index2", new { sortOrder=ViewBag.TypeSortParm})
+        </th>
+        <th>
+            @Html.ActionLink("Room","Index2", new { sortOrder=ViewBag.RoomSortParm})
+        </th>
+        <th>
+            @Html.ActionLink("Price","Index2", new { sortOrder=ViewBag.PriceSortParm})
+        </th>
+        <th>Operations</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            <a href="@Url.Action("Details",new { id=item.RealtyId })" class="btn btn-primary btn-small"><i class="icon-eye-open icon-white"></i> Details</a>
+        </td>
+    </tr>
+}
+
+</table>

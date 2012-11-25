@@ -1,63 +1,9 @@
 ﻿@model IEnumerable<RealtyManager.Models.Realty>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>List of Realties</h2>
+<h2>List of your realties</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-primary"})
-</p>
-<table class="table table-striped">
-    <tr>
-        <th>
-            @Html.ActionLink("Address","Index", new { sortOrder=ViewBag.AddressSortParm})
-        </th>
-        <th>
-            @Html.ActionLink("Size","Index", new { sortOrder=ViewBag.SizeSortParm})
-        </th>
-        <th>
-            @Html.ActionLink("Type","Index", new { sortOrder=ViewBag.TypeSortParm})
-        </th>
-        <th>
-            @Html.ActionLink("Room","Index", new { sortOrder=ViewBag.RoomSortParm})
-        </th>
-        <th>
-            @Html.ActionLink("Price","Index", new { sortOrder=ViewBag.PriceSortParm})
-        </th>
-        <th>Operations</th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Room)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            <a href="@Url.Action("Details",new { id=item.RealtyId })" class="btn btn-primary btn-small"><i class="icon-eye-open icon-white"></i> Details</a>
-            @model IEnumerable<RealtyManager.Models.Realty>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>List of Realties</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create", null, new {@class = "btn btn-primary"})
+    @Html.ActionLink("Add new realty", "Create", null, new {@class = "btn btn-primary"})
 </p>
 <table class="table table-striped">
     <tr>
@@ -100,12 +46,6 @@
             <a href="@Url.Action("Details",new { id=item.RealtyId })" class="btn btn-primary btn-small"><i class="icon-eye-open icon-white"></i> Details</a>
             <a href="@Url.Action("Edit",new { id=item.RealtyId })" class="btn btn-small"><i class="icon-pencil"></i> Edit</a>
             <a href="@Url.Action("Delete",new { id=item.RealtyId })" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i> Delete</a>
-        </td>
-    </tr>
-}
-
-</table>
-
         </td>
     </tr>
 }
