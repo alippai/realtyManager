@@ -21,6 +21,8 @@ namespace RealtyManager
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            RealtyContext db = new RealtyContext();
+            db.Database.Initialize(true);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
