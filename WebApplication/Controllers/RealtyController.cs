@@ -57,5 +57,17 @@ namespace RealtyManager.Controllers
             return View(realties.ToList());
         }
 
+        //
+        // GET: /RealtyManager/Details/5
+
+        public ActionResult Details(int id = 0)
+        {
+            Realty realty = db.Realties.Find(id);
+            if (realty == null)
+            {
+                return HttpNotFound();
+            }
+            return View(realty);
+        }
     }
 }
