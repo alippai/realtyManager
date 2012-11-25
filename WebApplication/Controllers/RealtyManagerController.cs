@@ -56,6 +56,8 @@ namespace RealtyManager.Controllers
             }
             return View(realties.ToList());
         }
+
+       
         
         //
         // GET: /RealtyManager/Details/5
