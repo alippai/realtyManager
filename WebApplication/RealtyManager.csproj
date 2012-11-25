@@ -327,6 +327,7 @@
     <Content Include="Views\RealtyManager\Create.cshtml" />
     <Content Include="Views\RealtyManager\Edit.cshtml" />
     <Content Include="Views\RealtyManager\Delete.cshtml" />
+    <Content Include="Views\RealtyManager\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
