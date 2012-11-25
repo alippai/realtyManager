@@ -13,14 +13,6 @@ namespace RealtyManager.Controllers
     {
         private RealtyContext db = new RealtyContext();
 
-        //
-        // GET: /RealtyManager/
-
-        /*public ActionResult Index()
-        {
-            return View(db.Realties.ToList());
-        }*/
-
         public ViewResult Index(string sortOrder)
         {
             ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
@@ -64,9 +56,7 @@ namespace RealtyManager.Controllers
             }
             return View(realties.ToList());
         }
-
-
-
+        
         //
         // GET: /RealtyManager/Details/5
 
@@ -100,7 +90,7 @@ namespace RealtyManager.Controllers
                 var curUser = (from u in db.UserProfiles
                                where u.UserName == User.Identity.Name
                                select u).Single();
-
+                realty.youtubeID(realty.VideoLink);
                 realty.OwnerId = curUser.UserId;
                 db.Realties.Add(realty);
                 db.SaveChanges();
@@ -113,6 +103,7 @@ namespace RealtyManager.Controllers
         //
         // GET: /RealtyManager/Edit/5
 
+        [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Edit(int id = 0)
         {
             Realty realty = db.Realties.Find(id);
@@ -146,6 +137,7 @@ namespace RealtyManager.Controllers
         //
         // GET: /RealtyManager/Delete/5
 
+        [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Delete(int id = 0)
         {
             Realty realty = db.Realties.Find(id);

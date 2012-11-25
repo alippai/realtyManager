@@ -51,6 +51,23 @@
         @Html.DisplayFor(model => model.Description)
     </div>
 
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VideoLink)
+    </div>
+    <div class="display-field">
+        @Microsoft.Web.Helpers.Video.Flash(path: Model.VideoLink,
+                 width: "400",
+                 height: "600",
+                 play: true,
+                 loop: true,
+                 menu:  false,
+                 bgColor: "white",
+                 quality: "medium",
+                 scale: "exactfit",
+                 windowMode: "window")
+    </div>
+
+
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.RealtyId }) |
