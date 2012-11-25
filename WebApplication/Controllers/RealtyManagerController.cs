@@ -93,7 +93,8 @@ namespace RealtyManager.Controllers
                 var curUser = (from u in db.UserProfiles
                                where u.UserName == User.Identity.Name
                                select u).Single();
-                realty.VideoLink = realty.youtubeID(realty.VideoLink);
+                if (realty.VideoLink!=null)
+                    realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 realty.OwnerId = curUser.UserId;
                 db.Realties.Add(realty);
                 db.SaveChanges();
