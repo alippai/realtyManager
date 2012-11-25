@@ -90,7 +90,14 @@ namespace RealtyManager.Controllers
                     Roles.AddUsersToRoles(new[] { model.UserName }, new[] { "LoggedIn" });
                     WebSecurity.Login(model.UserName, model.Password);
 
-                    db.Entry(model).State = EntityState.Modified;
+                    var curUser = (from u in db.UserProfiles
+                                   where u.UserName == model.UserName
+                                   select u).Single();
+
+                    var user = db.UserProfiles.Find(curUser.UserId);
+                    user.Email = model.Email;
+                    user.Phone = model.Phone;
+                    db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
                 }
@@ -118,7 +125,7 @@ namespace RealtyManager.Controllers
             if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
