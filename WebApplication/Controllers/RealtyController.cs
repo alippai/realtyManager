@@ -330,7 +330,6 @@ namespace RealtyManager.Controllers
                     }
                 }
 
-                //db.Entry(realty).State = EntityState.Modified;
                 db.Entry(oldRealty).CurrentValues.SetValues(realty);
                 db.SaveChanges();
                 return RedirectToAction("My");
@@ -364,6 +363,11 @@ namespace RealtyManager.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Realty realty = db.Realties.Find(id);
+
+            foreach (var image in realty.Images.ToList())
+            {
+                db.Images.Remove(image);
+            }
             db.Realties.Remove(realty);
             db.SaveChanges();
             return RedirectToAction("My");

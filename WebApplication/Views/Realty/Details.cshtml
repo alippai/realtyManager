@@ -36,36 +36,36 @@
         <dd>@Html.DisplayFor(model => model.Price)</dd>
 
         <dt>@Html.DisplayNameFor(model => model.Description)</dt>
-        <dd>@Html.DisplayFor(model => model.Description)</dd>    
+        <dd>@Html.DisplayFor(model => model.Description)</dd>
 
- 
-    </dl>
-    @if (Model.VideoLink != null) {
+        <dt>Check out the video </dt><dd>@if (Model.VideoLink != null) {
     <button class="btn videoLinkOpen" data-test="test" data-video="@Microsoft.Web.Helpers.Video.Flash(path: Model.VideoLink,
-                 width: "570",
-                 height: "340",
+                 width: "960",
+                 height: "640",
                  play: true,
                  loop: true,
                  menu:  false,
                  bgColor: "white",
                  quality: "medium",
                  scale: "exactfit",
-                 windowMode: "window").ToHtmlString().Replace("\"", "\\\"")">Check out the video</button>
-    }
+                 windowMode: "window").ToHtmlString().Replace("\"", "\\\"")">Just click here!</button>
+    }</dd>
+    </dl>
 </div>
 <div class="span3">
-<section>
-<dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Owner.FullName)</dt>
-        <dd>@Html.DisplayFor(model => model.Owner.FullName)</dd>
+    <section>
+    <h3>Contact the owner</h3>
+    <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Owner.FullName)</dt>
+            <dd>@Html.DisplayFor(model => model.Owner.FullName)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Owner.Email)</dt>
-        <dd>@Html.DisplayFor(model => model.Owner.Email)</dd>
+            <dt>@Html.DisplayNameFor(model => model.Owner.Email)</dt>
+            <dd>@Html.DisplayFor(model => model.Owner.Email)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.Owner.Phone)</dt>
-        <dd>@Html.DisplayFor(model => model.Owner.Phone)</dd>
-    </dl>
-</section>
+            <dt>@Html.DisplayNameFor(model => model.Owner.Phone)</dt>
+            <dd>@Html.DisplayFor(model => model.Owner.Phone)</dd>
+        </dl>
+    </section>
 </div>
 @if (Model.Images.Count > 0) {
 <div class="clearfix"></div>
