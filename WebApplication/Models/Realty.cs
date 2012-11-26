@@ -39,8 +39,6 @@ namespace RealtyManager.Models
         public string VideoLink { get; set; }
         public virtual UserProfile Owner { get; set; }
 
-        public virtual IList<ImageName> ImageNames { get; set; }
-
         public string youtubeID(string url)
         {
             Match regex = Regex.Match(url, "^[^v]+v=(.{11}).*", RegexOptions.IgnoreCase);
@@ -50,10 +48,7 @@ namespace RealtyManager.Models
             }
             return url;
         }
-    }
-    public class ImageName
-    {
-        public int Id { get; set; }
-        public string URL { get; set; }
+
+        public virtual IList<Image> Images { get; set; }
     }
 }

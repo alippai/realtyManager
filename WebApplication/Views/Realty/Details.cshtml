@@ -67,13 +67,13 @@
     </dl>
 </section>
 </div>
-@if (Model.ImageNames.Count > 0) {
+@if (Model.Images.Count > 0) {
 <div class="clearfix"></div>
 <div id="gallery" class="carousel slide">
   <!-- Carousel items -->
   <div class="carousel-inner">
-     @foreach( var photoUrl in Model.ImageNames ) {
-        <div class="item"><img src="@UrlHelper.GenerateContentUrl("/uploads/" + photoUrl.URL + ".ashx?width=1200", ViewContext.HttpContext)" alt="" title="" /></div>
+     @foreach( var photoUrl in Model.Images ) {
+        <div class="item"><img src="@UrlHelper.GenerateContentUrl("/uploads/test.ashx?width=1200&height=750", ViewContext.HttpContext)" alt="" title="" /></div>
      }
   </div>
   <!-- Carousel nav -->

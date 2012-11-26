@@ -174,7 +174,7 @@ namespace RealtyManager.Controllers
                 // files stuff
                 if (images != null)
                 {
-                    realty.ImageNames = new List<ImageName>();
+                    realty.Images = new List<Image>();
                     foreach (var image in images)
                     {
                         if (image.ContentLength > 0)
@@ -189,10 +189,21 @@ namespace RealtyManager.Controllers
                                 return View();
                             }
 
-                            var fileName = Path.GetFileName(image.FileName);
-                            var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
-                            image.SaveAs(path);
-                            realty.ImageNames.Add(new ImageName { URL = fileName });
+                            string filetype = image.ContentType;
+                            int filelength = image.ContentLength;
+                            Stream filestream = image.InputStream;
+                            byte[] filedata = new byte[filelength];
+                            string filename = Path.GetFileName(image.FileName);
+                            filestream.Read(filedata, 0, filelength);
+                                 
+                            var data = new Image
+                            {
+                                Name = filename,
+                                MimeType = filetype,
+                                Data = filedata
+                            };
+
+                            realty.Images.Add(data);
                         }
                     }
                 }
@@ -203,6 +214,20 @@ namespace RealtyManager.Controllers
             }
 
             return View(realty);
+        }
+
+        // GET: /Realty/Photo/5
+        public FileContentResult Photo(int id) {
+            //declare byte array to get file content from database and string to store file name
+            byte[] fileData;
+            string fileName;
+            var photo = db.Images.Find(id);
+            //only one record will be returned from database as expression uses condtion on primary field
+            //so get first record from returned values and retrive file content (binary) and filename 
+            fileData = (byte[])photo.Data.ToArray();
+            fileName = photo.Name;
+            //return file and provide byte file content and file name
+            return File(fileData, "text", fileName);
         }
 
         //
