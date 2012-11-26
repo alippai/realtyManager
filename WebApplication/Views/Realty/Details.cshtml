@@ -25,10 +25,9 @@
         <dt>@Html.DisplayNameFor(model => model.Description)</dt>
         <dd>@Html.DisplayFor(model => model.Description)</dd>    
 
-        <dt>@Html.DisplayNameFor(model => model.VideoLink)</dt>
-        <dd>@Html.DisplayFor(model => model.VideoLink)</dd>    
+ 
     </dl>
-
+    @if (Model.VideoLink != null) {
     <button class="btn videoLinkOpen" data-test="test" data-video="@Microsoft.Web.Helpers.Video.Flash(path: Model.VideoLink,
                  width: "570",
                  height: "340",
@@ -39,6 +38,7 @@
                  quality: "medium",
                  scale: "exactfit",
                  windowMode: "window").ToHtmlString().Replace("\"", "\\\"")">Check out the video</button>
+    }
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.RealtyId }) |
     @Html.ActionLink("Back to List", "Index")

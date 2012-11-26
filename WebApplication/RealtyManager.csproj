@@ -341,13 +341,13 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\Realty.cshtml" />
-    <Content Include="Views\RealtyManager\Index.cshtml" />
+    <Content Include="Views\Realty\Index.cshtml" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
-    <Content Include="Views\RealtyManager\My.cshtml" />
-    <Content Include="Views\RealtyManager\Details.cshtml" />
-    <Content Include="Views\RealtyManager\Create.cshtml" />
-    <Content Include="Views\RealtyManager\Edit.cshtml" />
-    <Content Include="Views\RealtyManager\Delete.cshtml" />
+    <Content Include="Views\Realty\My.cshtml" />
+    <Content Include="Views\Realty\Details.cshtml" />
+    <Content Include="Views\Realty\Create.cshtml" />
+    <Content Include="Views\Realty\Edit.cshtml" />
+    <Content Include="Views\Realty\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
