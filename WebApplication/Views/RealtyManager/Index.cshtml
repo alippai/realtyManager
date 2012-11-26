@@ -1,5 +1,6 @@
 ﻿@model PagedList.IPagedList<RealtyManager.Models.Realty>
-
+@using PagedList;
+@using PagedList.Mvc;
 <h2>Find your dream</h2>
 
 @using (Html.BeginForm())
@@ -8,7 +9,7 @@
         Find by name: @Html.TextBox("search", ViewBag.CurrentFilter as string)  
         <input type="submit" value="Search" /></p>
 }
-
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
 <table class="table table-striped">
     <tr>
         <th>
@@ -53,34 +54,7 @@
 }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
 
-<div>
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-    of @Model.PageCount
      
-    @if (Model.HasPreviousPage)
-    {
-        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
-        @Html.Raw(" ");
-        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
-    }
-    else
-    {
-        @:<<
-        @Html.Raw(" ");
-        @:< Prev
-    }
-     
-    @if (Model.HasNextPage)
-    {
-        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
-        @Html.Raw(" ");
-        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
-    }
-    else
-    {
-        @:Next >
-        @Html.Raw(" ")
-        @:>>
-    }
-</div>
+    
