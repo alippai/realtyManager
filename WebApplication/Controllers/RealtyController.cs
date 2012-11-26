@@ -160,7 +160,7 @@ namespace RealtyManager.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator, LoggedIn")]
-        public ActionResult Create(Realty realty, IEnumerable<HttpPostedFileBase> images)
+        public ActionResult Create(Realty realty, IEnumerable<HttpPostedFileBase> newImages)
         {
             if (ModelState.IsValid)
             {
@@ -172,10 +172,10 @@ namespace RealtyManager.Controllers
                 realty.Owner = curUser;
 
                 // files stuff
-                if (images != null && images.First() != null)
+                if (newImages != null && newImages.First() != null)
                 {
                     realty.Images = new List<Image>();
-                    foreach (var image in images)
+                    foreach (var image in newImages)
                     {
                         if (image.ContentLength > 0)
                         {
@@ -216,11 +216,13 @@ namespace RealtyManager.Controllers
             return View(realty);
         }
 
-        // GET: /Realty/Photo/5
-        public FileContentResult Photo(int id) {
+        // GET: /Realty/PhotoGallery/5
+        public FileContentResult PhotoGallery(string id)
+        {
             byte[] fileData;
             string fileName;
-            var photo = db.Images.Find(id);
+            var idInt = Int32.Parse(id.Replace(".ashx", ""));
+            var photo = db.Images.Find(idInt);
             fileData = (byte[])photo.Data.ToArray();
             fileName = photo.Name;
             return File(fileData, photo.MimeType, fileName);
