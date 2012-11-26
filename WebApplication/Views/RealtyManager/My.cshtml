@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<RealtyManager.Models.Realty>
 
-<h2>Find your dream</h2>
+<h2>List of your realties</h2>
 
+<p>
+    @Html.ActionLink("Add new realty", "Create", null, new {@class = "btn btn-primary"})
+</p>
 <table class="table table-striped">
     <tr>
         <th>
@@ -41,6 +44,8 @@
         </td>
         <td>
             <a href="@Url.Action("Details",new { id=item.RealtyId })" class="btn btn-primary btn-small"><i class="icon-eye-open icon-white"></i> Details</a>
+            <a href="@Url.Action("Edit",new { id=item.RealtyId })" class="btn btn-small"><i class="icon-pencil"></i> Edit</a>
+            <a href="@Url.Action("Delete",new { id=item.RealtyId })" class="btn btn-danger btn-small"><i class="icon-trash icon-white"></i> Delete</a>
         </td>
     </tr>
 }

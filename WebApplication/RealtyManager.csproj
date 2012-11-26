@@ -173,7 +173,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RealtyController.cs" />
     <Compile Include="Controllers\RealtyManagerController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -335,9 +334,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\Realty.cshtml" />
-    <Content Include="Views\Realty\Index.cshtml" />
-    <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\RealtyManager\Index.cshtml" />
+    <Content Include="Views\Shared\_DefaultLayout.cshtml" />
+    <Content Include="Views\RealtyManager\My.cshtml" />
     <Content Include="Views\RealtyManager\Details.cshtml" />
     <Content Include="Views\RealtyManager\Create.cshtml" />
     <Content Include="Views\RealtyManager\Edit.cshtml" />
