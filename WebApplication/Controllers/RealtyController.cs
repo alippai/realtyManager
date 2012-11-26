@@ -5,10 +5,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Realty.Models;
+using RealtyManager.Models;
 using PagedList;
 
-namespace Realty.Controllers
+namespace RealtyManager.Controllers
 {
     [HandleError]
     public class RealtyController : Controller
