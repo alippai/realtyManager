@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Realty
+namespace RealtyManager
 {
     public class BundleConfig
     {
