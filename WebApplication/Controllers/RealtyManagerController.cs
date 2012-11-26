@@ -5,17 +5,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Realty.Models;
+using RealtyManager.Models;
 using PagedList;
 
-namespace Realty.Controllers
+namespace RealtyManager.Controllers
 {
     [HandleError]
-    public class RealtyController : Controller
+    public class RealtyManagerController : Controller
     {
         private RealtyContext db = new RealtyContext();
 
-        // GET: /Realty/
+        // GET: /RealtyManager/
         [AllowAnonymous]
         public ActionResult Index(string sortOrder, string currentFilter, string search, int? page)
         {
@@ -82,7 +82,7 @@ namespace Realty.Controllers
 
         }
 
-        // GET: /Realty/My
+        // GET: /RealtyManager/My
         [Authorize(Roles = "Administrator, LoggedIn")]
         public ViewResult My(string sortOrder)
         {
@@ -129,7 +129,7 @@ namespace Realty.Controllers
         }
 
         //
-        // GET: /Realty/Details/5
+        // GET: /RealtyManager/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -144,7 +144,7 @@ namespace Realty.Controllers
         }
 
         //
-        // GET: /Realty/Create
+        // GET: /RealtyManager/Create
         [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Create()
         {
@@ -152,7 +152,7 @@ namespace Realty.Controllers
         }
 
         //
-        // POST: /Realty/Create
+        // POST: /RealtyManager/Create
 
         [HttpPost]
         [Authorize(Roles = "Administrator, LoggedIn")]
@@ -175,7 +175,7 @@ namespace Realty.Controllers
         }
 
         //
-        // GET: /Realty/Edit/5
+        // GET: /RealtyManager/Edit/5
 
         [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Edit(int id = 0)
@@ -195,7 +195,7 @@ namespace Realty.Controllers
         }
 
         //
-        // POST: /Realty/Edit/5
+        // POST: /RealtyManager/Edit/5
 
         [HttpPost]
         public ActionResult Edit(Realty realty)
@@ -216,7 +216,7 @@ namespace Realty.Controllers
         }
 
         //
-        // GET: /Realty/Delete/5
+        // GET: /RealtyManager/Delete/5
 
         [Authorize(Roles = "Administrator, LoggedIn")]
         public ActionResult Delete(int id = 0)
@@ -235,7 +235,7 @@ namespace Realty.Controllers
         }
 
         //
-        // POST: /Realty/Delete/5
+        // POST: /RealtyManager/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)

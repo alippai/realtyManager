@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace Realty.Models
+namespace RealtyManager.Models
 {
 
     [Table("UserProfile")]
