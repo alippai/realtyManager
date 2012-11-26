@@ -16,7 +16,8 @@ namespace RealtyManager.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
-
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
         [Display(Name = "E-mail")]
         public string Email { get; set; }
         [Display(Name = "Phone number")]
@@ -59,6 +60,10 @@ namespace RealtyManager.Models
 
     public class RegisterModel
     {
+        [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
