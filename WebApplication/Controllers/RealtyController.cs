@@ -220,8 +220,17 @@ namespace RealtyManager.Controllers
             var photo = db.Images.Find(idInt);
             fileData = (byte[])photo.Data.ToArray();
             fileName = photo.Name;
-        
-            return File(fileData, photo.MimeType, fileName);
+
+            using (var outStream = new MemoryStream())
+            {
+                using (var inStream = new MemoryStream(fileData))
+                {
+                    var settings = new ResizeSettings("maxwidth=1200&maxheight=750");
+                    ImageResizer.ImageBuilder.Current.Build(inStream, outStream, settings);
+                    var outBytes = outStream.ToArray();
+                    return new FileContentResult(outBytes, photo.MimeType);
+                }
+            }
         }
 
         // GET: /Realty/PhotoThumbnail/5
