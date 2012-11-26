@@ -12,6 +12,7 @@ namespace RealtyManager.Models
     {
         public DbSet<Realty> Realties { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Image> Images { get; set; }
         
         public RealtyContext() : base("DefaultConnection")
         {   

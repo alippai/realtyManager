@@ -576,6 +576,10 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+#gallery {
+  height: 750px;
+}
+
 
 /********************
 *   Mobile Styles   *
