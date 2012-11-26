@@ -32,12 +32,15 @@
             <ul class="nav">
               <li>@Html.ActionLink("Home", "Index", "Home")</li>
               <li>@Html.ActionLink("Browse", "Index", "Realty")</li>
-              <li class="dropdown">
+              @if (Request.IsAuthenticated) {
+                <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">My account<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li>@Html.ActionLink("My realties", "My", "Realty")</li>
                   <li>@Html.ActionLink("My profile", "Manage", "Account")</li>
                 </ul>
+                </li>
+               }
               <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
             </ul>
             <div class="navbar-text pull-right">
