@@ -1,23 +1,30 @@
-﻿@model IEnumerable<RealtyManager.Models.Realty>
+﻿@model PagedList.IPagedList<RealtyManager.Models.Realty>
 
 <h2>Find your dream</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("search", ViewBag.CurrentFilter as string)  
+        <input type="submit" value="Search" /></p>
+}
 
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.ActionLink("Address","Index", new { sortOrder=ViewBag.AddressSortParm})
+            @Html.ActionLink("Address","Index", new { sortOrder=ViewBag.AddressSortParm,  currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.ActionLink("Size","Index", new { sortOrder=ViewBag.SizeSortParm})
+            @Html.ActionLink("Size","Index", new { sortOrder=ViewBag.SizeSortParm,  currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.ActionLink("Type","Index", new { sortOrder=ViewBag.TypeSortParm})
+            @Html.ActionLink("Type","Index", new { sortOrder=ViewBag.TypeSortParm,  currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.ActionLink("Room","Index", new { sortOrder=ViewBag.RoomSortParm})
+            @Html.ActionLink("Room","Index", new { sortOrder=ViewBag.RoomSortParm,  currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.ActionLink("Price","Index", new { sortOrder=ViewBag.PriceSortParm})
+            @Html.ActionLink("Price","Index", new { sortOrder=ViewBag.PriceSortParm,  currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>Operations</th>
     </tr>
@@ -46,3 +53,34 @@
 }
 
 </table>
+
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    of @Model.PageCount
+     
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+        @Html.Raw(" ");
+        @Html.ActionLink("< Prev", "Index", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw(" ");
+        @:< Prev
+    }
+     
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Next >", "Index", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+        @Html.Raw(" ");
+        @Html.ActionLink(">>", "Index", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter=ViewBag.CurrentFilter  })
+    }
+    else
+    {
+        @:Next >
+        @Html.Raw(" ")
+        @:>>
+    }
+</div>

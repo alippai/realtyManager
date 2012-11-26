@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RealtyManager.Models;
+using PagedList;
 
 namespace RealtyManager.Controllers
 {
@@ -16,7 +17,7 @@ namespace RealtyManager.Controllers
 
         // GET: /RealtyManager/
         [AllowAnonymous]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string currentFilter, string search, int? page)
         {
             ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
@@ -24,6 +25,23 @@ namespace RealtyManager.Controllers
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price desc" : "Price";
             var realties = from s in db.Realties select s;
+
+            if (Request.HttpMethod == "GET")
+            {
+                search = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+            ViewBag.CurrentFilter = search;
+
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                realties = realties.Where(s => s.Address.ToUpper().Contains(search.ToUpper()));
+            }
+
             switch (sortOrder)
             {
                 case "Address desc":
@@ -58,6 +76,11 @@ namespace RealtyManager.Controllers
                     break;
             }
             return View(realties.ToList());
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(realties.ToPagedList(pageNumber, pageSize));
+
         }
 
         // GET: /RealtyManager/My
