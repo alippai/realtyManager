@@ -9,6 +9,7 @@ using RealtyManager.Models;
 
 namespace RealtyManager.Controllers
 {
+    [HandleError]
     public class RealtyManagerController : Controller
     {
         private RealtyContext db = new RealtyContext();
@@ -118,7 +119,7 @@ namespace RealtyManager.Controllers
             realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
             if (!User.IsInRole("Administrator") || realty == null)
             {
-                throw new HttpException(403, "You are unauthorized to access this page. Please log in.");
+                return new HttpStatusCodeResult(403, "You are unauthorized to access this page. Please log in.");
             }
             
             return View(realty);
@@ -159,7 +160,7 @@ namespace RealtyManager.Controllers
             realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
             if (!User.IsInRole("Administrator") || realty == null)
             {
-                throw new HttpException(403, "You are unauthorized to access this page. Please log in.");
+                return new HttpStatusCodeResult(403, "You are unauthorized to access this page. Please log in.");
             }
             return View(realty);
         }
