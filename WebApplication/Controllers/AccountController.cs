@@ -97,6 +97,7 @@ namespace RealtyManager.Controllers
                     var user = db.UserProfiles.Find(curUser.UserId);
                     user.Email = model.Email;
                     user.Phone = model.Phone;
+                    user.FullName = model.FullName;
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
@@ -146,10 +147,7 @@ namespace RealtyManager.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : "";
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed." : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
@@ -165,53 +163,39 @@ namespace RealtyManager.Controllers
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasLocalAccount)
-            {
-                if (ModelState.IsValid)
-                {
-                    // ChangePassword will throw an exception rather than return false in certain failure scenarios.
-                    bool changePasswordSucceeded;
-                    try
-                    {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
-                    }
-                    catch (Exception)
-                    {
-                        changePasswordSucceeded = false;
-                    }
 
-                    if (changePasswordSucceeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                    }
-                }
-            }
-            else
+            if (ModelState.IsValid)
             {
-                // User does not have a local password so remove any validation errors caused by a missing
-                // OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
+                // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+                bool changePasswordSucceeded;
+                try
                 {
-                    state.Errors.Clear();
+                    changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                }
+                catch (Exception)
+                {
+                    changePasswordSucceeded = false;
                 }
 
-                if (ModelState.IsValid)
+                if (changePasswordSucceeded)
                 {
-                    try
-                    {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError("", e);
-                    }
+                    return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                 }
+                else
+                {
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                }
+
+                // update the fields
+                var curUser = (from u in db.UserProfiles
+                                where u.UserName == User.Identity.Name
+                                select u).Single();
+                var user = db.UserProfiles.Find(curUser.UserId);
+                user.Email = model.Email;
+                user.Phone = model.Phone;
+                user.FullName = model.FullName;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
             }
 
             // If we got this far, something failed, redisplay form
