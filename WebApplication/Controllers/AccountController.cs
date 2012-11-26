@@ -150,7 +150,12 @@ namespace RealtyManager.Controllers
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed." : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
-            return View();
+            var curUser = (from u in db.UserProfiles
+                           where u.UserName == User.Identity.Name
+                           select u).Single();
+            var profile = db.UserProfiles.Find(curUser.UserId);
+            var model = new LocalPasswordModel { Email = profile.Email, Phone = profile.Phone, FullName = profile.FullName };
+            return View(model);
         }
 
         //
@@ -177,6 +182,17 @@ namespace RealtyManager.Controllers
                     changePasswordSucceeded = false;
                 }
 
+                // update the fields
+                var curUser = (from u in db.UserProfiles
+                               where u.UserName == User.Identity.Name
+                               select u).Single();
+                var user = db.UserProfiles.Find(curUser.UserId);
+                user.Email = model.Email;
+                user.Phone = model.Phone;
+                user.FullName = model.FullName;
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+
                 if (changePasswordSucceeded)
                 {
                     return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
@@ -184,18 +200,7 @@ namespace RealtyManager.Controllers
                 else
                 {
                     ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                }
-
-                // update the fields
-                var curUser = (from u in db.UserProfiles
-                                where u.UserName == User.Identity.Name
-                                select u).Single();
-                var user = db.UserProfiles.Find(curUser.UserId);
-                user.Email = model.Email;
-                user.Phone = model.Phone;
-                user.FullName = model.FullName;
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                } 
             }
 
             // If we got this far, something failed, redisplay form
