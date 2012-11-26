@@ -97,6 +97,7 @@ namespace RealtyManager.Controllers
                     var user = db.UserProfiles.Find(curUser.UserId);
                     user.Email = model.Email;
                     user.Phone = model.Phone;
+                    user.FullName = model.FullName;
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
