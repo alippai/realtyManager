@@ -218,16 +218,12 @@ namespace RealtyManager.Controllers
 
         // GET: /Realty/Photo/5
         public FileContentResult Photo(int id) {
-            //declare byte array to get file content from database and string to store file name
             byte[] fileData;
             string fileName;
             var photo = db.Images.Find(id);
-            //only one record will be returned from database as expression uses condtion on primary field
-            //so get first record from returned values and retrive file content (binary) and filename 
             fileData = (byte[])photo.Data.ToArray();
             fileName = photo.Name;
-            //return file and provide byte file content and file name
-            return File(fileData, "text", fileName);
+            return File(fileData, photo.MimeType, fileName);
         }
 
         //
