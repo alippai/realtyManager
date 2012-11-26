@@ -67,6 +67,8 @@ namespace RealtyManager.Controllers
         public ActionResult Details(int id = 0)
         {
             Realty realty = db.Realties.Find(id);
+            UserProfile user = db.UserProfiles.Find(realty.OwnerId);
+
             if (realty == null)
             {
                 return HttpNotFound();
@@ -117,7 +119,7 @@ namespace RealtyManager.Controllers
                 return HttpNotFound();
             }
             realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
-            if (!User.IsInRole("Administrator") || realty == null)
+            if (!User.IsInRole("Administrator") && realty == null)
             {
                 return new HttpStatusCodeResult(403, "You are unauthorized to access this page. Please log in.");
             }
@@ -158,7 +160,7 @@ namespace RealtyManager.Controllers
                 return HttpNotFound();
             }
             realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
-            if (!User.IsInRole("Administrator") || realty == null)
+            if (!User.IsInRole("Administrator") && realty == null)
             {
                 return new HttpStatusCodeResult(403, "You are unauthorized to access this page. Please log in.");
             }
