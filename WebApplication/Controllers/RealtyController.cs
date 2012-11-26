@@ -87,18 +87,19 @@ namespace RealtyManager.Controllers
         // GET: /Realty/My
         [Authorize(Roles = "Administrator, LoggedIn")]
         public ViewResult My(string sortOrder)
-        {
-            ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
+        {   
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "Price desc" : "";
+            //ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price desc" : "Price";
+
             var realties = from r in db.Realties where r.Owner.UserName == User.Identity.Name select r;
             switch (sortOrder)
             {
-                case "Address desc":
+               /* case "Address desc":
                     realties = realties.OrderByDescending(s => s.Address);
-                    break;
+                    break;*/
                 case "Room":
                     realties = realties.OrderBy(s => s.Room);
                     break;
@@ -117,15 +118,15 @@ namespace RealtyManager.Controllers
                 case "Type desc":
                     realties = realties.OrderByDescending(s => s.Type);
                     break;
-                case "Price":
-                    realties = realties.OrderBy(s => s.Price);
-                    break;
                 case "Price desc":
                     realties = realties.OrderByDescending(s => s.Price);
                     break;
                 default:
-                    realties = realties.OrderBy(s => s.Address);
+                    realties = realties.OrderBy(s => s.Price);
                     break;
+                /*default:
+                    realties = realties.OrderBy(s => s.Address);
+                    break;*/
             }
             return View(realties.ToList());
         }
