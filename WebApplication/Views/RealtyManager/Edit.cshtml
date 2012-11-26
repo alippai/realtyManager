@@ -1,4 +1,4 @@
-﻿@model RealtyManager.Models.Realty
+﻿@model Realty.Models.Realty
 
 @{
     ViewBag.Title = "Edit";
@@ -34,7 +34,7 @@
             @Html.LabelFor(model => model.Type)
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.Type,new SelectList(Enum.GetValues(typeof(RealtyManager.Models.TypeNames))))
+            @Html.DropDownListFor(model => model.Type,new SelectList(Enum.GetValues(typeof(Realty.Models.TypeNames))))
             @Html.ValidationMessageFor(model => model.Type)
         </div>
 
