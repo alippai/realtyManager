@@ -38,7 +38,7 @@
             @if (item.Images.FirstOrDefault() != null)
             {
                  <a href="@Url.Action("Details",new { id=item.RealtyId })">
-                     <img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoThumbnail/" + item.Images.First().Id + ".ashx?width=80&height=60", ViewContext.HttpContext)" alt="" title="" />
+                     <img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoThumbnail/" + item.Images.First().Id + ".ashx", ViewContext.HttpContext)" alt="" title="" />
                  </a>
             }
         </td>

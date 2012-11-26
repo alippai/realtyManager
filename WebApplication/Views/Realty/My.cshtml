@@ -30,7 +30,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            <img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoThumbnail/" + item.Images.First().Id + ".ashx?width=80&height=60", ViewContext.HttpContext)" alt="" title="" />
+            <img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoThumbnail/" + item.Images.First().Id + ".ashx", ViewContext.HttpContext)" alt="" title="" />
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)

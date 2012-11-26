@@ -74,10 +74,10 @@
   <div class="carousel-inner">
      @foreach( var image in Model.Images ) {
         if(image == Model.Images.First()) {
-            <div class="item active"><img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoGallery/" + image.Id + ".ashx?width=1200&height=750", ViewContext.HttpContext)" alt="" title="" /></div>
+            <div class="item active"><img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoGallery/" + image.Id + ".ashx", ViewContext.HttpContext)" alt="" title="" /></div>
 
         } else {
-            <div class="item"><img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoGallery/" + image.Id + ".ashx?width=1200&height=750", ViewContext.HttpContext)" alt="" title="" /></div>
+            <div class="item"><img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoGallery/" + image.Id + ".ashx", ViewContext.HttpContext)" alt="" title="" /></div>
         }
      }
   </div>
