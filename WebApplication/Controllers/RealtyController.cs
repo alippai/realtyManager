@@ -19,12 +19,12 @@ namespace RealtyManager.Controllers
         // GET: /Realty/
         [AllowAnonymous]
         public ActionResult Index(string sortOrder, string currentFilter, string search, int? page)
-        {
-            ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
+        {            
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "Price desc" : "";
+         // ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
-            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price desc" : "Price";
             var realties = from s in db.Realties select s;
 
             if (Request.HttpMethod == "GET")
@@ -45,8 +45,8 @@ namespace RealtyManager.Controllers
 
             switch (sortOrder)
             {
-                case "Address desc":
-                    realties = realties.OrderByDescending(s => s.Address);
+                case "Price desc":
+                    realties = realties.OrderByDescending(s => s.Price);
                     break;
                 case "Room":
                     realties = realties.OrderBy(s => s.Room);
@@ -66,14 +66,8 @@ namespace RealtyManager.Controllers
                 case "Type desc":
                     realties = realties.OrderByDescending(s => s.Type);
                     break;
-                case "Price":
-                    realties = realties.OrderBy(s => s.Price);
-                    break;
-                case "Price desc":
-                    realties = realties.OrderByDescending(s => s.Price);
-                    break;
                 default:
-                    realties = realties.OrderBy(s => s.Address);
+                    realties = realties.OrderBy(s => s.Price);
                     break;
             }
 
@@ -87,7 +81,7 @@ namespace RealtyManager.Controllers
         // GET: /Realty/My
         [Authorize(Roles = "Administrator, LoggedIn")]
         public ViewResult My(string sortOrder)
-        {   
+        {
             ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "Price desc" : "";
             //ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
@@ -97,36 +91,30 @@ namespace RealtyManager.Controllers
             var realties = from r in db.Realties where r.Owner.UserName == User.Identity.Name select r;
             switch (sortOrder)
             {
-               /* case "Address desc":
-                    realties = realties.OrderByDescending(s => s.Address);
-                    break;*/
+               case "Price desc":
+                    realties = realties.OrderByDescending(r => r.Price);
+                    break;
                 case "Room":
-                    realties = realties.OrderBy(s => s.Room);
+                    realties = realties.OrderBy(r => r.Room);
                     break;
                 case "Room desc":
-                    realties = realties.OrderByDescending(s => s.Room);
+                    realties = realties.OrderByDescending(r => r.Room);
                     break;
                 case "Size":
-                    realties = realties.OrderBy(s => s.Size);
+                    realties = realties.OrderBy(r => r.Size);
                     break;
                 case "Size desc":
-                    realties = realties.OrderByDescending(s => s.Size);
+                    realties = realties.OrderByDescending(r => r.Size);
                     break;
                 case "Type":
-                    realties = realties.OrderBy(s => s.Type);
+                    realties = realties.OrderBy(r => r.Type);
                     break;
                 case "Type desc":
-                    realties = realties.OrderByDescending(s => s.Type);
-                    break;
-                case "Price desc":
-                    realties = realties.OrderByDescending(s => s.Price);
+                    realties = realties.OrderByDescending(r => r.Type);
                     break;
                 default:
-                    realties = realties.OrderBy(s => s.Price);
+                    realties = realties.OrderBy(r => r.Price);
                     break;
-                /*default:
-                    realties = realties.OrderBy(s => s.Address);
-                    break;*/
             }
             return View(realties.ToList());
         }

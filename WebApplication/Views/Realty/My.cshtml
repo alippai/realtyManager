@@ -8,19 +8,19 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.ActionLink("Address","Index", new { sortOrder=ViewBag.AddressSortParm})
+            @Html.ActionLink("Price","My", new { sortOrder=ViewBag.PriceSortParmr})
         </th>
         <th>
-            @Html.ActionLink("Size","Index", new { sortOrder=ViewBag.SizeSortParm})
+            @Html.ActionLink("Size","My", new { sortOrder=ViewBag.SizeSortParm})
         </th>
         <th>
-            @Html.ActionLink("Type","Index", new { sortOrder=ViewBag.TypeSortParm})
+            @Html.ActionLink("Type","My", new { sortOrder=ViewBag.TypeSortParm})
         </th>
         <th>
-            @Html.ActionLink("Room","Index", new { sortOrder=ViewBag.RoomSortParm})
+            @Html.ActionLink("Room","My", new { sortOrder=ViewBag.RoomSortParm})
         </th>
         <th>
-            @Html.ActionLink("Price","Index", new { sortOrder=ViewBag.PriceSortParm})
+            Address
         </th>
         <th>Operations</th>
     </tr>
@@ -28,7 +28,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Address)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Size)
@@ -40,7 +40,7 @@
             @Html.DisplayFor(modelItem => item.Room)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
+            @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
             <a href="@Url.Action("Details",new { id=item.RealtyId })" class="btn btn-primary btn-small"><i class="icon-eye-open icon-white"></i> Details</a>
