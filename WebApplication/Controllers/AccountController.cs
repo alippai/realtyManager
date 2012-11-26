@@ -8,11 +8,11 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using RealtyManager.Filters;
-using RealtyManager.Models;
+using Realty.Filters;
+using Realty.Models;
 using System.Data;
 
-namespace RealtyManager.Controllers
+namespace Realty.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RealtyManager.Properties {
+namespace Realty.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

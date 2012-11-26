@@ -8,7 +8,7 @@ using System.Web;
 using PagedList;
 
 
-namespace RealtyManager.Models
+namespace Realty.Models
 {
     public enum TypeNames { 
         Room,

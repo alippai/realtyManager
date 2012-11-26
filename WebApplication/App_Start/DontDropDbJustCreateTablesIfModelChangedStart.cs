@@ -1,9 +1,9 @@
 using System.Data.Entity;
 using Devtalk.EF.CodeFirst;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(RealtyManager.App_Start.DontDropDbJustCreateTablesIfModelChangedStart), "Start")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(Realty.App_Start.DontDropDbJustCreateTablesIfModelChangedStart), "Start")]
 
-namespace RealtyManager.App_Start {
+namespace Realty.App_Start {
     public static class DontDropDbJustCreateTablesIfModelChangedStart {
         public static void Start() {
             // Uncomment this line and replace CONTEXT_NAME with the name of your DbContext if you are 

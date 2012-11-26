@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 
 
-namespace RealtyManager.Models
+namespace Realty.Models
 {
     public class RealtyContext : DbContext
     {
