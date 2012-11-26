@@ -12,13 +12,17 @@
     <fieldset>
         <legend>Realty</legend>
 
-        <div class="editor-label">
+        <form class="form-inline">
+        <label class="editor-label">
             @Html.LabelFor(model => model.Address)
-        </div>
-        <div class="editor-field">
+        </label>
+        <input type="text" class="editor-field">
             @Html.EditorFor(model => model.Address)
+        <label class="editor-label">
             @Html.ValidationMessageFor(model => model.Address)
-        </div>
+        </label>
+        </form>
+
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Size)
