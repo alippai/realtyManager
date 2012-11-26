@@ -13,6 +13,11 @@
       <li>@Html.ActionLink("Edit", "Edit", new { id=Model.RealtyId })</li>
     </ul>
     }
+
+   <div class="row">
+      <div class="span6">
+
+    
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Address)</dt>
         <dd>@Html.DisplayFor(model => model.Address)</dd>
@@ -50,6 +55,8 @@
    
     @Html.ActionLink("Back to List", "Index")
 </p>
+</div>
+<div class="span3">
 <section>
 <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Owner.FullName)</dt>
@@ -62,4 +69,4 @@
         <dd>@Html.DisplayFor(model => model.Owner.Phone)</dd>
     </dl>
 </section>
-
+</div>
