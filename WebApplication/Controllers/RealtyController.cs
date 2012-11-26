@@ -67,7 +67,7 @@ namespace RealtyManager.Controllers
             {
                 return HttpNotFound();
             }
-            return View(realty);
+            return View("~/Views/RealtyManager/Details.cshtml");
         }
     }
 }

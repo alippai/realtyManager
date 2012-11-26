@@ -40,3 +40,13 @@
     @Html.ActionLink("Edit", "Edit", new { id=Model.RealtyId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<section>
+<dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Owner.Email)</dt>
+        <dd>@Html.DisplayFor(model => model.Owner.Email)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Owner.Phone)</dt>
+        <dd>@Html.DisplayFor(model => model.Owner.Phone)</dd>
+    </dl>
+</section>
+

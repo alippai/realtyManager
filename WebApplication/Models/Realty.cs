@@ -36,7 +36,7 @@ namespace RealtyManager.Models
         
         [DataType(DataType.Url)]
         public string VideoLink { get; set; }
-        public int OwnerId { get; set; }
+        public UserProfile Owner { get; set; }
 
         public string youtubeID(string url)
         {

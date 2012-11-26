@@ -24,7 +24,7 @@ namespace RealtyManager.Controllers
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
             ViewBag.PriceSortParm = sortOrder == "Price" ? "Price desc" : "Price";
-            var realties = from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name select r;
+            var realties = from r in db.Realties where r.Owner.UserName == User.Identity.Name select r;
             switch (sortOrder)
             {
                 case "Address desc":
@@ -67,12 +67,12 @@ namespace RealtyManager.Controllers
         public ActionResult Details(int id = 0)
         {
             Realty realty = db.Realties.Find(id);
-            UserProfile user = db.UserProfiles.Find(realty.OwnerId);
 
             if (realty == null)
             {
                 return HttpNotFound();
             }
+
             return View(realty);
         }
 
@@ -98,7 +98,7 @@ namespace RealtyManager.Controllers
                                select u).Single();
                 if (realty.VideoLink!=null)
                     realty.VideoLink = realty.youtubeID(realty.VideoLink);
-                realty.OwnerId = curUser.UserId;
+                realty.Owner = curUser;
                 db.Realties.Add(realty);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -118,7 +118,7 @@ namespace RealtyManager.Controllers
             {
                 return HttpNotFound();
             }
-            realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
+            realty = (from r in db.Realties where r.Owner.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
             if (!User.IsInRole("Administrator") && realty == null)
             {
                 return new HttpStatusCodeResult(403, "You are unauthorized to access this page. Please log in.");
@@ -138,7 +138,7 @@ namespace RealtyManager.Controllers
                 var curUser = (from u in db.UserProfiles
                                where u.UserName == User.Identity.Name
                                select u).Single();
-                realty.OwnerId = curUser.UserId;
+                realty.Owner = curUser;
 
                 realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 db.Entry(realty).State = EntityState.Modified;
@@ -159,7 +159,7 @@ namespace RealtyManager.Controllers
             {
                 return HttpNotFound();
             }
-            realty = (from r in db.Realties join u in db.UserProfiles on r.OwnerId equals u.UserId where u.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
+            realty = (from r in db.Realties where r.Owner.UserName == User.Identity.Name && r.RealtyId == id select r).Single();
             if (!User.IsInRole("Administrator") && realty == null)
             {
                 return new HttpStatusCodeResult(403, "You are unauthorized to access this page. Please log in.");
