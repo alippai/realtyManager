@@ -22,7 +22,6 @@ namespace RealtyManager.Controllers
         public ActionResult Index(string sortOrder, string currentFilter, string search, int? page)
         {            
             ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "Price desc" : "";
-         // ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
@@ -84,7 +83,6 @@ namespace RealtyManager.Controllers
         public ViewResult My(string sortOrder)
         {
             ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "Price desc" : "";
-            //ViewBag.AddressSortParm = String.IsNullOrEmpty(sortOrder) ? "Address desc" : "";
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
