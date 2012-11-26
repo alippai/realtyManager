@@ -172,7 +172,7 @@ namespace RealtyManager.Controllers
                 realty.Owner = curUser;
 
                 // files stuff
-                if (images != null)
+                if (images != null && images.First() != null)
                 {
                     realty.Images = new List<Image>();
                     foreach (var image in images)
