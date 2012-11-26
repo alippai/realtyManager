@@ -5,7 +5,14 @@
 }
 
     <h1>@Html.DisplayFor(model => model.Address), @Html.DisplayFor(model => model.Room) rooms, @Html.DisplayFor(model => model.Price) Ft</h1>
-
+    @if(ViewBag.editAccess) {
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#">View</a>
+      </li>
+      <li>@Html.ActionLink("Edit", "Edit", new { id=Model.RealtyId })</li>
+    </ul>
+    }
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Address)</dt>
         <dd>@Html.DisplayFor(model => model.Address)</dd>
@@ -40,7 +47,7 @@
                  windowMode: "window").ToHtmlString().Replace("\"", "\\\"")">Check out the video</button>
     }
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.RealtyId }) |
+   
     @Html.ActionLink("Back to List", "Index")
 </p>
 <section>

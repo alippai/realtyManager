@@ -78,6 +78,7 @@ namespace RealtyManager.Controllers
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
+
             return View(realties.ToPagedList(pageNumber, pageSize));
 
         }
@@ -139,6 +140,8 @@ namespace RealtyManager.Controllers
             {
                 return HttpNotFound();
             }
+            bool editAccess = (from r in db.Realties where r.Owner.UserName == User.Identity.Name && r.RealtyId == id select r).Any();
+            ViewBag.editAccess = editAccess;
 
             return View(realty);
         }

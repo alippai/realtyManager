@@ -4,8 +4,11 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
+<h1>@Html.DisplayFor(model => model.Address), @Html.DisplayFor(model => model.Room) rooms, @Html.DisplayFor(model => model.Price) Ft</h1>
+    <ul class="nav nav-tabs">
+      <li>@Html.ActionLink("View", "Details", new { id=Model.RealtyId })</li>
+      <li class="active"><a href="#">Edit</a></li>
+    </ul>
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
