@@ -75,7 +75,6 @@ namespace RealtyManager.Controllers
                     realties = realties.OrderBy(s => s.Address);
                     break;
             }
-            return View(realties.ToList());
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
