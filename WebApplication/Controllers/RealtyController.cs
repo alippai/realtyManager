@@ -288,11 +288,11 @@ namespace RealtyManager.Controllers
                                where u.UserName == User.Identity.Name
                                select u).Single();
                 realty.Owner = curUser;
-
-                realty.VideoLink = realty.youtubeID(realty.VideoLink);
+                if (realty.VideoLink != null)
+                    realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 db.Entry(realty).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("My");
             }
             return View(realty);
         }

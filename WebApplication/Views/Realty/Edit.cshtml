@@ -9,72 +9,80 @@
       <li>@Html.ActionLink("View", "Details", new { id=Model.RealtyId })</li>
       <li class="active"><a href="#">Edit</a></li>
     </ul>
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Edit", "Realty", FormMethod.Post, new { enctype = "multipart/form-data", @class="form-horizontal" })) {
     @Html.ValidationSummary(true)
 
     <fieldset>
         <legend>Realty</legend>
 
-        @Html.HiddenFor(model => model.RealtyId)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Address)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Address)
-            @Html.ValidationMessageFor(model => model.Address)
+        <div class="control-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Size)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Size)
-            @Html.ValidationMessageFor(model => model.Size)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Type)
-        </div>
-        <div class="editor-field">
-            @Html.DropDownListFor(model => model.Type,new SelectList(Enum.GetValues(typeof(RealtyManager.Models.TypeNames))))
-            @Html.ValidationMessageFor(model => model.Type)
+        <div class="control-group">
+            @Html.LabelFor(model => model.Size, new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Size)
+                @Html.ValidationMessageFor(model => model.Size)
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Room)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Room)
-            @Html.ValidationMessageFor(model => model.Room)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Price)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Price)
-            @Html.ValidationMessageFor(model => model.Price)
+        <div class="control-group">
+            @Html.LabelFor(model => model.Type,  new { @class = "control-label" })
+            <div class="controls">
+                @Html.DropDownListFor(model => model.Type,new SelectList(Enum.GetValues(typeof(RealtyManager.Models.TypeNames))))
+                @Html.ValidationMessageFor(model => model.Type)
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Description)
-        </div>
-        <div class="editor-field">
-            @Html.TextAreaFor(model => model.Description, 10, 55, null)
-            @Html.ValidationMessageFor(model => model.Description)
+        <div class="control-group">
+            @Html.LabelFor(model => model.Room,  new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Room)
+                @Html.ValidationMessageFor(model => model.Room)
+            </div>
         </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.VideoLink)
+        <div class="control-group">
+            @Html.LabelFor(model => model.Price,  new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.VideoLink)
-            @Html.ValidationMessageFor(model => model.VideoLink)
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.Description,  new { @class = "control-label" })
+            <div class="controls">
+                @Html.TextAreaFor(model => model.Description, 10, 55, null)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
         </div>
-        <p>
-            <input type="submit" value="Save" />
-        </p>
+
+        <div class="control-group">
+            @Html.LabelFor(model => model.VideoLink,  new { @class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.VideoLink)
+                @Html.ValidationMessageFor(model => model.VideoLink)
+            </div>
+        </div>
+            
+        <div class="control-group">
+            <label for="file" class="control-label">Upload Images:</label>
+            <div class="controls">
+                <input type="file" name="newImages" value="" multiple="multiple" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
     </fieldset>
 }
 
