@@ -72,6 +72,7 @@
             <label for="file" class="control-label">Upload Images:</label>
             <div class="controls">
                 <input type="file" name="newImages" value="" multiple="multiple" />
+                @Html.ValidationMessageFor(model => model.Images)
             </div>
         </div>
 

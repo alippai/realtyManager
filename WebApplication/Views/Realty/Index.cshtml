@@ -7,10 +7,10 @@
 {
     <p>
         Find by address: @Html.TextBox("search", ViewBag.CurrentFilter as string)  
-        <input type="submit" value="Search" /></p>
+        <input type="submit" value="Search" class="btn" /></p>
 }
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.sortOrder }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
 <table class="table table-striped" id="RealtyBrowser">
     <tr>
         <th>
@@ -61,7 +61,7 @@
 }
 
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, currentFilter = ViewBag.CurrentFilter, sortOrder = ViewBag.sortOrder }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
 
      
     

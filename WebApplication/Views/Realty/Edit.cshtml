@@ -11,6 +11,7 @@
     </ul>
 @using (Html.BeginForm("Edit", "Realty", FormMethod.Post, new { enctype = "multipart/form-data", @class="form-horizontal" })) {
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.RealtyId)
 
     <fieldset>
         <legend>Realty</legend>
@@ -75,6 +76,7 @@
             <label for="file" class="control-label">Upload Images:</label>
             <div class="controls">
                 <input type="file" name="newImages" value="" multiple="multiple" />
+                @Html.ValidationMessageFor(model => model.Images)
             </div>
         </div>
 

@@ -25,6 +25,8 @@ namespace RealtyManager.Controllers
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
+            ViewBag.sortOrder = sortOrder;
+
             var realties = from s in db.Realties select s;
 
             if (Request.HttpMethod == "GET")
@@ -86,6 +88,7 @@ namespace RealtyManager.Controllers
             ViewBag.SizeSortParm = sortOrder == "Size" ? "Size desc" : "Size";
             ViewBag.RoomSortParm = sortOrder == "Room" ? "Room desc" : "Room";
             ViewBag.TypeSortParm = sortOrder == "Type" ? "Type desc" : "Type";
+            ViewBag.sortOrder = sortOrder;
 
             var realties = from r in db.Realties where r.Owner.UserName == User.Identity.Name select r;
             switch (sortOrder)
@@ -173,7 +176,7 @@ namespace RealtyManager.Controllers
 
                             if (!supportedTypes.Contains(fileExt))
                             {
-                                ModelState.AddModelError("photo", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
+                                ModelState.AddModelError("Images", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
                                 return View();
                             }
 
@@ -197,7 +200,7 @@ namespace RealtyManager.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("photo", "You have to upload at least one photo.");
+                    ModelState.AddModelError("Images", "You have to upload at least one photo.");
                     return View();
                 }
 
@@ -278,7 +281,7 @@ namespace RealtyManager.Controllers
         // POST: /Realty/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Realty realty)
+        public ActionResult Edit(Realty realty, IEnumerable<HttpPostedFileBase> newImages)
         {
             if (ModelState.IsValid)
             {
@@ -288,7 +291,47 @@ namespace RealtyManager.Controllers
                 realty.Owner = curUser;
                 if (realty.VideoLink != null)
                     realty.VideoLink = realty.youtubeID(realty.VideoLink);
-                db.Entry(realty).State = EntityState.Modified;
+
+                realty.Images = (from r in db.Realties where r.RealtyId == realty.RealtyId select r).Single().Images;
+                var oldRealty = (from r in db.Realties where r.RealtyId == realty.RealtyId select r).Single();
+                // files stuff
+                if (newImages != null && newImages.First() != null)
+                {
+                    foreach (var image in newImages)
+                    {
+                        if (image.ContentLength > 0)
+                        {
+                            var supportedTypes = new[] { "jpg", "jpeg", "png" };
+
+                            var fileExt = System.IO.Path.GetExtension(image.FileName).Substring(1);
+
+                            if (!supportedTypes.Contains(fileExt))
+                            {
+                                ModelState.AddModelError("Images", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
+                                return View();
+                            }
+
+                            string filetype = image.ContentType;
+                            int filelength = image.ContentLength;
+                            Stream filestream = image.InputStream;
+                            byte[] filedata = new byte[filelength];
+                            string filename = Path.GetFileName(image.FileName);
+                            filestream.Read(filedata, 0, filelength);
+
+                            var data = new Image
+                            {
+                                Name = filename,
+                                MimeType = filetype,
+                                Data = filedata
+                            };
+
+                            realty.Images.Add(data);
+                        }
+                    }
+                }
+
+                //db.Entry(realty).State = EntityState.Modified;
+                db.Entry(oldRealty).CurrentValues.SetValues(realty);
                 db.SaveChanges();
                 return RedirectToAction("My");
             }
@@ -323,7 +366,7 @@ namespace RealtyManager.Controllers
             Realty realty = db.Realties.Find(id);
             db.Realties.Remove(realty);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("My");
         }
 
         protected override void Dispose(bool disposing)
