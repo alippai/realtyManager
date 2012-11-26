@@ -48,7 +48,6 @@ namespace RealtyManager.Models
             }
             return url;
         }
-
-
+        public List<string> ImageNames { get; set; }
     }
 }

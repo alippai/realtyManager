@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using RealtyManager.Models;
 using PagedList;
+using System.IO;
 
 namespace RealtyManager.Controllers
 {
@@ -159,16 +160,42 @@ namespace RealtyManager.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator, LoggedIn")]
-        public ActionResult Create(Realty realty)
+        public ActionResult Create(Realty realty, IEnumerable<HttpPostedFileBase> images)
         {
             if (ModelState.IsValid)
             {
                 var curUser = (from u in db.UserProfiles
                                where u.UserName == User.Identity.Name
                                select u).Single();
-                if (realty.VideoLink!=null)
+                if (realty.VideoLink != null)
                     realty.VideoLink = realty.youtubeID(realty.VideoLink);
                 realty.Owner = curUser;
+
+                // files stuff
+                if (images != null)
+                {
+                    foreach (var image in images)
+                    {
+                        if (image.ContentLength > 0)
+                        {
+                            var supportedTypes = new[] { "jpg", "jpeg", "png" };
+
+                            var fileExt = System.IO.Path.GetExtension(image.FileName).Substring(1);
+
+                            if (!supportedTypes.Contains(fileExt))
+                            {
+                                ModelState.AddModelError("photo", "Invalid type. Only the following types (jpg, jpeg, png) are supported.");
+                                return View();
+                            }
+
+                            var fileName = Path.GetFileName(image.FileName);
+                            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                            image.SaveAs(path);
+                            realty.ImageNames.Add(path);
+                        }
+                    }
+                }
+
                 db.Realties.Add(realty);
                 db.SaveChanges();
                 return RedirectToAction("Index");
