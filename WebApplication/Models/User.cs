@@ -27,6 +27,10 @@ namespace RealtyManager.Models
     public class LocalPasswordModel
     {
         [Required]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
@@ -41,6 +45,14 @@ namespace RealtyManager.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
+
+        [Display(Name = "Phone number")]
+        public string Phone { get; set; }
     }
 
     public class LoginModel
