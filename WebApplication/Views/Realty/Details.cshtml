@@ -73,7 +73,7 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
      @foreach( var photoUrl in Model.ImageNames ) {
-        <div class="item"><img src="@UrlHelper.GenerateContentUrl("/uploads/" + photoUrl.URL, ViewContext.HttpContext)" alt="" title="" /></div>
+        <div class="item"><img src="@UrlHelper.GenerateContentUrl("/uploads/" + photoUrl.URL + ".ashx?width=1200", ViewContext.HttpContext)" alt="" title="" /></div>
      }
   </div>
   <!-- Carousel nav -->
