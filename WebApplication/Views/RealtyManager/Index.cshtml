@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Realty.Models.Realty>
+﻿@model PagedList.IPagedList<RealtyManager.Models.Realty>
 @using PagedList;
 @using PagedList.Mvc;
 <h2>Find your dream</h2>
@@ -9,6 +9,7 @@
         Find by name: @Html.TextBox("search", ViewBag.CurrentFilter as string)  
         <input type="submit" value="Search" /></p>
 }
+
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
 <table class="table table-striped">
     <tr>
