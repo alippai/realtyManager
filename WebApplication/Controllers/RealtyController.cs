@@ -174,6 +174,7 @@ namespace RealtyManager.Controllers
                 // files stuff
                 if (images != null)
                 {
+                    realty.ImageNames = new List<ImageName>();
                     foreach (var image in images)
                     {
                         if (image.ContentLength > 0)
@@ -189,9 +190,9 @@ namespace RealtyManager.Controllers
                             }
 
                             var fileName = Path.GetFileName(image.FileName);
-                            var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                            var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
                             image.SaveAs(path);
-                            realty.ImageNames.Add(path);
+                            realty.ImageNames.Add(new ImageName { URL = fileName });
                         }
                     }
                 }
