@@ -577,9 +577,12 @@ tr.pager td {
 }
 
 #gallery {
-  height: 750px;
+    height: 750px;
 }
 
+#RealtyBrowser td:first-child, #RealtyManager td:first-child {
+    width: 170px;
+}
 
 /********************
 *   Mobile Styles   *

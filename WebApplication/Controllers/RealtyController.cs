@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using RealtyManager.Models;
 using PagedList;
 using System.IO;
+using ImageResizer;
 
 namespace RealtyManager.Controllers
 {
@@ -184,7 +185,7 @@ namespace RealtyManager.Controllers
                             byte[] filedata = new byte[filelength];
                             string filename = Path.GetFileName(image.FileName);
                             filestream.Read(filedata, 0, filelength);
-                                 
+
                             var data = new Image
                             {
                                 Name = filename,
@@ -195,6 +196,11 @@ namespace RealtyManager.Controllers
                             realty.Images.Add(data);
                         }
                     }
+                }
+                else
+                {
+                    ModelState.AddModelError("photo", "You have to upload at least one photo.");
+                    return View();
                 }
 
                 db.Realties.Add(realty);
@@ -214,8 +220,32 @@ namespace RealtyManager.Controllers
             var photo = db.Images.Find(idInt);
             fileData = (byte[])photo.Data.ToArray();
             fileName = photo.Name;
+        
             return File(fileData, photo.MimeType, fileName);
         }
+
+        // GET: /Realty/PhotoThumbnail/5
+        public FileContentResult PhotoThumbnail(string id)
+        {
+            byte[] fileData;
+            string fileName;
+            var idInt = Int32.Parse(id.Replace(".ashx", ""));
+            var photo = db.Images.Find(idInt);
+            fileData = (byte[])photo.Data.ToArray();
+            fileName = photo.Name;
+
+            using (var outStream = new MemoryStream())
+            {
+                using (var inStream = new MemoryStream(fileData))
+                {
+                    var settings = new ResizeSettings("maxwidth=160&maxheight=160");
+                    ImageResizer.ImageBuilder.Current.Build(inStream, outStream, settings);
+                    var outBytes = outStream.ToArray();
+                    return new FileContentResult(outBytes, photo.MimeType);
+                }
+            }
+        }
+     
 
         //
         // GET: /Realty/Edit/5

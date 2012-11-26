@@ -5,8 +5,10 @@
 <p>
     @Html.ActionLink("Add new realty", "Create", null, new {@class = "btn btn-primary"})
 </p>
-<table class="table table-striped">
+<table class="table table-striped" id="RealtyManager">
     <tr>
+        <th>
+        </th>
         <th>
             @Html.ActionLink("Price","My", new { sortOrder=ViewBag.PriceSortParm})
         </th>
@@ -27,6 +29,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoThumbnail/" + item.Images.First().Id + ".ashx?width=80&height=60", ViewContext.HttpContext)" alt="" title="" />
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>

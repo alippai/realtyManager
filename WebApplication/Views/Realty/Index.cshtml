@@ -11,8 +11,10 @@
 }
 
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }), PagedListRenderOptions.OnlyShowFivePagesAtATime)
-<table class="table table-striped">
+<table class="table table-striped" id="RealtyBrowser">
     <tr>
+        <th>
+        </th>
         <th>
             @Html.ActionLink("Price","Index", new { sortOrder=ViewBag.PriceSortParm,  currentFilter=ViewBag.CurrentFilter})
         </th>
@@ -28,11 +30,18 @@
         <th>
             Address
         </th>
-        <th>Operations</th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+     <tr>
+        <td>
+            @if (item.Images.FirstOrDefault() != null)
+            {
+                 <a href="@Url.Action("Details",new { id=item.RealtyId })">
+                     <img src="@UrlHelper.GenerateContentUrl("/Realty/PhotoThumbnail/" + item.Images.First().Id + ".ashx?width=80&height=60", ViewContext.HttpContext)" alt="" title="" />
+                 </a>
+            }
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
@@ -47,9 +56,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            <a href="@Url.Action("Details",new { id=item.RealtyId })" class="btn btn-primary btn-small"><i class="icon-eye-open icon-white"></i> Details</a>
         </td>
     </tr>
 }
