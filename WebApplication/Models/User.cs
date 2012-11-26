@@ -16,7 +16,10 @@ namespace RealtyManager.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
+        [Display(Name = "Phone number")]
         public string Phone { get; set; }
     }
 
